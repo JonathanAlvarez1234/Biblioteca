@@ -91,7 +91,6 @@ public class LibroControllerView implements Initializable {
         libro.setEditorial(tfEditorial.getText());
         libro.setNumeroEstanteria(tfEstanteria.getText());
         libro.setCluster(tfCluster.getText());
-        //libro.setCategoria(cmbCategorias.getSelectionModel());
         libroService.guardarLibro(libro, MethodType.POST);
         cargarDatos();
     }
@@ -105,7 +104,6 @@ public class LibroControllerView implements Initializable {
         libro.setEditorial(tfEditorial.getText());
         libro.setNumeroEstanteria(tfEstanteria.getText());
         libro.setCluster(tfCluster.getText());
-        //libro.setCategoria(cmbCategorias.getSelectionModel());
         libroService.guardarLibro(libro, MethodType.PUT);
         cargarDatos();
     }
