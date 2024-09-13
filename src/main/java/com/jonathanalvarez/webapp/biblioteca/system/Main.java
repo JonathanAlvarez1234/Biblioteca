@@ -7,7 +7,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.jonathanalvarez.webapp.biblioteca.BibliotecaApplication;
+import com.jonathanalvarez.webapp.biblioteca.controller.FXController.CategoriaControllerView;
+import com.jonathanalvarez.webapp.biblioteca.controller.FXController.ClienteControllerView;
+import com.jonathanalvarez.webapp.biblioteca.controller.FXController.EmpleadoControllerView;
 import com.jonathanalvarez.webapp.biblioteca.controller.FXController.IndexController;
+import com.jonathanalvarez.webapp.biblioteca.controller.FXController.LibroControllerView;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +41,6 @@ public class Main extends Application {
         stage.show();
     }
 
-    //cambio de escena
     public Initializable switchScene(String fxmlName, int width, int height) throws IOException {
         Initializable resultado = null;
         FXMLLoader loader = new FXMLLoader();
@@ -57,8 +60,44 @@ public class Main extends Application {
 
     public void indexView(){
         try {
-            IndexController indexView = (IndexController)switchScene("index.fxml", 600, 400);
-            //indexView.setStage(this);       
+            IndexController indexView = (IndexController)switchScene("index.fxml", 1200, 775);
+            indexView.setStage(this);       
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void CategoriaView(){
+        try {
+            CategoriaControllerView categoriaView = (CategoriaControllerView)switchScene("CategoriaView.fxml", 1200, 750);
+            categoriaView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ClienteView(){
+        try {
+            ClienteControllerView clienteView = (ClienteControllerView)switchScene("ClienteView.fxml", 1200, 750);
+            clienteView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void EmpleadoView(){
+        try {
+            EmpleadoControllerView empleadoView = (EmpleadoControllerView)switchScene("EmpleadoView.fxml", 1200, 750);
+            empleadoView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void LibroView(){
+        try {
+            LibroControllerView libroView = (LibroControllerView)switchScene("LibroView.fxml", 1200, 750);
+            libroView.setStage(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

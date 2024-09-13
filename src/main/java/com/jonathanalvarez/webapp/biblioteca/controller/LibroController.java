@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanalvarez.webapp.biblioteca.model.Libro;
 import com.jonathanalvarez.webapp.biblioteca.service.LibroService;
+import com.jonathanalvarez.webapp.biblioteca.util.MethodType;
 
 @Controller
 @RestController
@@ -48,37 +49,37 @@ public class LibroController {
 
     @PostMapping("/libro")
     public ResponseEntity<Map<String, String>> agregarLibro(@RequestBody Libro libro){
-        Map<String,String> response = new HashMap<>();
+        Map<String, String> response = new HashMap<>();
         try {
-            libroService.guardarLibro(libro);
-            response.put("message", "El Libro Se Agrego Con Exito");
+            libroService.guardarLibro(libro,MethodType.POST);
+            response.put("message", "Libro creado con exito");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.put("message", "Error");
-            response.put("err", "Hubo Un Error Al Crear El Libro");
+            response.put("err", "Hubo un error al crear el libro " + e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
     }
 
     @PutMapping("/libro")
-    public ResponseEntity<Map<String, String>>editarLibro(@RequestParam Long id, @RequestBody Libro libroNuevo){
-        Map<String,String> response = new HashMap<>();
+    public ResponseEntity<Map<String, String>> editarLibro(@RequestParam Long id, @RequestBody Libro newlibro){
+        Map<String, String> response = new HashMap<>();
         try {
-            Libro libro = libroService.buscarLibroPorId(id);
-            libro.setIsbn(libroNuevo.getIsbn());
-            libro.setNombre(libroNuevo.getNombre());
-            libro.setSinopsis(libroNuevo.getSinopsis());
-            libro.setAutor(libroNuevo.getAutor());
-            libro.setEditorial(libroNuevo.getEditorial());
-            libro.setDisponibilidad(libroNuevo.getDisponibilidad());
-            libro.setNumeroEstanteria(libroNuevo.getNumeroEstanteria());
-            libro.setCluster(libroNuevo.getCluster());
-            libro.setCategoria(libroNuevo.getCategoria());
-            libroService.guardarLibro(libro);
-            response.put("message", "El Libro Se Edito Con Exito");
+            Libro libroOld = libroService.buscarLibroPorId(id);
+            libroOld.setIsbn(newlibro.getIsbn());
+            libroOld.setNombre(newlibro.getNombre());
+            libroOld.setSinopsis(newlibro.getSinopsis());
+            libroOld.setAutor(newlibro.getAutor());
+            libroOld.setEditorial(newlibro.getEditorial());
+            libroOld.setDisponibilidad(newlibro.getDisponibilidad());
+            libroOld.setNumeroEstanteria(newlibro.getNumeroEstanteria());
+            libroOld.setCluster(newlibro.getCluster());
+            libroOld.setCategoria(newlibro.getCategoria());
+            libroService.guardarLibro(libroOld, MethodType.PUT);
+            response.put("message", "Libro editado con exito!");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.put("message", "Hubo Un Error Al Editar El Libro");
+            response.put("message", "El libro no se pudo editar!");
             return ResponseEntity.badRequest().body(response);
         }
     }
@@ -89,10 +90,10 @@ public class LibroController {
         try {
             Libro libro = libroService.buscarLibroPorId(id);
             libroService.eliminarLibro(libro); 
-            response.put("message", "El Libro Se Elimino Con Exito");
+            response.put("message", "El libro se elimino con exito");
             return ResponseEntity.ok(response); 
         } catch (Exception e) {
-            response.put("message", "Hubo Un Error Al Eliminar El Libro");
+            response.put("message", "Hubo un error al eliminar el libro");
             return ResponseEntity.badRequest().body(response);
         }
         

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jonathanalvarez.webapp.biblioteca.controller.FXController.CategoriaControllerView">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Categoria.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="tfId" editable="false" layoutX="54.0" layoutY="219.0" prefHeight="36.0" prefWidth="194.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="tfNombre" layoutX="315.0" layoutY="219.0" prefHeight="36.0" prefWidth="270.0" style="-fx-background-radius: 10;" />
+      <TableView fx:id="tblCategoria" layoutX="50.0" layoutY="280.0" prefHeight="303.0" prefWidth="700.0">
+        <columns>
+          <TableColumn fx:id="colId" text="ID" />
+          <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="620.0" text="Nombre Categoria" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnEliminar" layoutX="208.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="51.0" prefWidth="107.0" style="-fx-background-radius: 20; -fx-background-color: #ed4e7f;" text="Eliminar" />
+      <Button fx:id="btnGuardar" layoutX="784.0" layoutY="406.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="51.0" prefWidth="107.0" style="-fx-background-radius: 20;" text="Guardar" />
+      <Button fx:id="btnLimpiar" layoutX="784.0" layoutY="483.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="51.0" prefWidth="107.0" style="-fx-background-radius: 20;" text="Limpiar formulario" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnRegresar" layoutX="50.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="51.0" prefWidth="107.0" style="-fx-background-radius: 20;" text="Regresar" />
+   </children>
+</AnchorPane>

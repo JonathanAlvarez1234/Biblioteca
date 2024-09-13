@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jonathanalvarez.webapp.biblioteca.controller.FXController.LibroControllerView">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Libro.png" />
+         </image>
+      </ImageView>
+      <TextField editable="false" layoutX="29.0" layoutY="192.0" prefHeight="25.0" prefWidth="97.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="tfId" layoutX="153.0" layoutY="192.0" prefHeight="25.0" prefWidth="97.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="tfNombre" layoutX="283.0" layoutY="192.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="tfAutor" layoutX="448.0" layoutY="192.0" prefHeight="25.0" prefWidth="161.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="tfEditorial" layoutX="619.0" layoutY="192.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="tfdisponibilidad" layoutX="832.0" layoutY="192.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="tfCluster" layoutX="1016.0" layoutY="192.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="tfEstanteria" layoutX="207.0" layoutY="267.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-radius: 10;" />
+      <TextArea fx:id="taSipnosis" layoutX="14.0" layoutY="267.0" prefHeight="248.0" prefWidth="186.0" />
+      <ComboBox fx:id="cmbCategorias" layoutX="208.0" layoutY="335.0" prefWidth="150.0" />
+      <TableView fx:id="tblLbros" layoutX="371.0" layoutY="251.0" prefHeight="338.0" prefWidth="800.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="25.0" text="ID" />
+          <TableColumn fx:id="colIsbn" prefWidth="75.0" text="ISBN" />
+            <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+            <TableColumn fx:id="colSinopsis" prefWidth="126.0" text="Sinopsis" />
+            <TableColumn fx:id="colAutor" prefWidth="77.0" text="Autor" />
+            <TableColumn fx:id="colEditorial" prefWidth="75.0" text="Editorial" />
+            <TableColumn fx:id="colDisponibilidad" prefWidth="95.0" text="Disponibilidad" />
+            <TableColumn fx:id="colEstanteria" prefWidth="66.0" text="Estanteria" />
+            <TableColumn fx:id="colCluster" prefWidth="84.0" text="Cluster" />
+            <TableColumn fx:id="colCategoria" prefWidth="100.0" text="Categoría" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnRegresar" layoutX="29.0" layoutY="672.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="51.0" prefWidth="107.0" style="-fx-background-radius: 20;" text="Regresar" />
+      <Button fx:id="btnGuardar" layoutX="557.0" layoutY="606.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="107.0" style="-fx-background-radius: 20;" text="Guardar" />
+      <Button fx:id="btnLimpiar" layoutX="709.0" layoutY="606.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="51.0" prefWidth="107.0" style="-fx-background-radius: 20;" text="Limpiar" />
+      <Button fx:id="btnEliminar" layoutX="859.0" layoutY="606.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="51.0" prefWidth="107.0" style="-fx-background-radius: 20; -fx-background-color: #ed4e7f;" text="Eliminar" />
+   </children>
+</AnchorPane>

@@ -7,13 +7,32 @@ import org.springframework.stereotype.Service;
 
 import com.jonathanalvarez.webapp.biblioteca.model.Libro;
 import com.jonathanalvarez.webapp.biblioteca.repository.LibroRepository;
+import com.jonathanalvarez.webapp.biblioteca.util.EstadoLibro;
+import com.jonathanalvarez.webapp.biblioteca.util.MethodType;
 
 @Service
 public class LibroService implements ILibroService {
 
-
     @Autowired
     LibroRepository libroRepository;
+
+    @Override
+    public List<Libro> listarLibros() {
+        return libroRepository.findAll();
+    }
+
+    @Override
+    public Libro guardarLibro(Libro libro, MethodType methodType) {
+        if(methodType == MethodType.POST){
+            libro.setDisponibilidad(EstadoLibro.DISPONIBLE);
+            return libroRepository.save(libro);
+        }else if(methodType == MethodType.PUT){
+            return libroRepository.save(libro);
+        }else{
+            return null;
+        }
+       
+    }
 
     @Override
     public Libro buscarLibroPorId(Long id) {
@@ -22,18 +41,7 @@ public class LibroService implements ILibroService {
 
     @Override
     public void eliminarLibro(Libro libro) {
-        libroRepository.delete(libro);
+       libroRepository.delete(libro);
     }
-
-    @Override
-    public Libro guardarLibro(Libro libro) {
-        return libroRepository.save(libro);
-    }
-
-    @Override
-    public List<Libro> listarLibros() {
-        return libroRepository.findAll();
-    }
-    
 
 }
