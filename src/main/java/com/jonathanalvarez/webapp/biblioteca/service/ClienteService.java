@@ -10,26 +10,29 @@ import com.jonathanalvarez.webapp.biblioteca.repository.ClienteRepository;
 
 @Service
 public class ClienteService implements IClienteService{
+
     @Autowired
-    ClienteRepository clienteRepository;
+    private ClienteRepository clienteRepository;
 
     @Override
-    public List<Cliente> listarClientes() {
+    public List<Cliente> listarClientes(){
         return clienteRepository.findAll();
     }
 
     @Override
-    public Cliente guardarCliente(Cliente cliente) {
+    public Cliente buscarClientePorId(Long id){
+        return clienteRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Cliente guardarCliente(Cliente cliente){
         return clienteRepository.save(cliente);
     }
 
     @Override
-    public Cliente buscarClientePorId(Long dpi) {
-        return clienteRepository.findById(dpi).orElse(null);
-    }
-
-    @Override
-    public void eliminarCliente(Cliente cliente) {
+    public void eliminarCliente(Cliente cliente){
         clienteRepository.delete(cliente);
     }
+    
+
 }

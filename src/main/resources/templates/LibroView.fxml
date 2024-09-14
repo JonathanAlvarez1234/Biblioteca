@@ -18,7 +18,7 @@
          </image>
       </ImageView>
       <TextField editable="false" layoutX="29.0" layoutY="192.0" prefHeight="25.0" prefWidth="97.0" style="-fx-background-radius: 10;" />
-      <TextField fx:id="tfId" layoutX="153.0" layoutY="192.0" prefHeight="25.0" prefWidth="97.0" style="-fx-background-radius: 10;" />
+      <TextField editable="false" layoutX="153.0" layoutY="192.0" prefHeight="25.0" prefWidth="97.0" style="-fx-background-radius: 10;" />
       <TextField fx:id="tfNombre" layoutX="283.0" layoutY="192.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-radius: 10;" />
       <TextField fx:id="tfAutor" layoutX="448.0" layoutY="192.0" prefHeight="25.0" prefWidth="161.0" style="-fx-background-radius: 10;" />
       <TextField fx:id="tfEditorial" layoutX="619.0" layoutY="192.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-radius: 10;" />

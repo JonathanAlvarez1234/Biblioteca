@@ -11,12 +11,15 @@ import lombok.ToString;
 @Data
 @ToString
 @Table(name = "Clientes")
+
 public class Cliente {
     @Id
-    private long dpi;
-    @NotNull(message = "El Nombre No Puede Ser Nulo")
+    @NotNull(message = "DPI no puede ser nulo")
+    private Long dpi;
+    @NotNull(message = "nombre no puede ser nulo")
     private String nombre;
+    @NotNull(message = "apellido no puede ser nulo")
     private String apellido;
+    @NotNull(message = "telefono no puede ser nulo")
     private String telefono;
-
 }

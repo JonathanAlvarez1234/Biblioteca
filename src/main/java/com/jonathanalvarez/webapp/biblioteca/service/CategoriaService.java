@@ -12,44 +12,43 @@ import com.jonathanalvarez.webapp.biblioteca.repository.CategoriaRepository;
 public class CategoriaService implements ICategoriaService{
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRespository;
+            
 
     @Override
     public List<Categoria> listarCategorias() {
-       return categoriaRepository.findAll();
+        return categoriaRespository.findAll();
     }
 
     @Override
-    public Categoria buscarCategoriaPorId(long id) {
-        return categoriaRepository.findById(id).orElse(null);
+    public Categoria buscarCategoriaPorId(Long id) {
+       return categoriaRespository.findById(id).orElse(null);
     }
 
     @Override
     public Boolean guardarCategoria(Categoria categoria) {
-        if (!verificarCategoriaDuplicada(categoria)) {
-            categoriaRepository.save(categoria);
-            return true;
-        }else{
-            return false;
-        }
+      if(!verificarCategoriaDuplicado(categoria)){
+         categoriaRespository.save(categoria);
+         return true;
+      }
+       return false;
     }
 
     @Override
     public void eliminarCategoria(Categoria categoria) {
-        categoriaRepository.delete(categoria);
+       categoriaRespository.delete(categoria);
     }
 
-    @Override
-    public Boolean verificarCategoriaDuplicada(Categoria categoriaNueva) {
-        List<Categoria> categorias = listarCategorias();
-        Boolean flag = false;
-
-        for (Categoria categoria : categorias) {
-            if (categoriaNueva.getNombreCategoria().trim().equalsIgnoreCase(categoria.getNombreCategoria().trim())&&!categoriaNueva.getId().equals(categoria.getId())) {
-                return true;
-            }
-        }
-        return flag;
-    }
+   @Override
+   public Boolean verificarCategoriaDuplicado(Categoria newCategoria) {
+     List<Categoria> categorias = listarCategorias();
+     Boolean flag = false;
+     for (Categoria categoria : categorias) {
+         if(newCategoria.getNombreCategoria().trim().equalsIgnoreCase(categoria.getNombreCategoria()) && !newCategoria.getId().equals(categoria.getId())){
+            flag = true;
+         }
+     }
+     return flag;
+   }
 
 }

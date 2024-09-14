@@ -9,14 +9,15 @@ import com.jonathanalvarez.webapp.biblioteca.model.Empleado;
 import com.jonathanalvarez.webapp.biblioteca.repository.EmpleadoRepository;
 
 @Service
-public class EmpleadoService implements IEmpleadoService{
+
+public class EmpleadoService implements IEmpleadoService {
 
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
     @Override
-    public List<Empleado>listarEmpleados() {
-       return empleadoRepository.findAll();
+    public List<Empleado> listarEmpleados(){
+        return empleadoRepository.findAll();
     }
 
     @Override
@@ -26,12 +27,11 @@ public class EmpleadoService implements IEmpleadoService{
 
     @Override
     public Boolean guardarEmpleado(Empleado empleado) {
-        if (!verificarDpiDuplicado(empleado)) {
+        if(!verificarpDpiDuplicado(empleado)){
             empleadoRepository.save(empleado);
             return true;
-        }else{
-            return false;
         }
+        return false;
     }
 
     @Override
@@ -39,15 +39,17 @@ public class EmpleadoService implements IEmpleadoService{
         empleadoRepository.delete(empleado);
     }
 
-    public Boolean verificarDpiDuplicado(Empleado empleadoNuevo){
+    @Override
+    public Boolean verificarpDpiDuplicado(Empleado newEmpleado) {
         List<Empleado> empleados = listarEmpleados();
         Boolean flag = false;
         for (Empleado empleado : empleados) {
-            if (empleado.getDpi().equals(empleadoNuevo.getDpi())&& !empleado.getId().equals(empleadoNuevo.getId())) {
-                flag= true;
+            if(empleado.getDpi().equals(newEmpleado.getDpi()) && !empleado.getId().equals(newEmpleado.getId())){
+                flag = true;
             }
         }
         return flag;
-
     }
+
+    
 }

@@ -5,33 +5,31 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
-import com.jonathanalvarez.webapp.biblioteca.model.Categoria;
-import com.jonathanalvarez.webapp.biblioteca.service.CategoriaService;
 import com.jonathanalvarez.webapp.biblioteca.system.Main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.MenuItem;   
+import javafx.scene.control.MenuItem;
 import lombok.Setter;
 
 @Component
 public class IndexController implements Initializable {
 
     @FXML
-    MenuItem btnCategorias, btnClientes, btnEmpleados, btnLibros, btnPrestamos;
+    MenuItem btnCategorias, btnClientes, btnEmpleados, btnLibros,btnPrestamos;
 
     @Setter
     private Main stage;
 
     @Override
-    public void initialize(URL url, ResourceBundle resources) {
+    public void initialize(URL arg0, ResourceBundle arg1) {
 
     }
 
     @FXML
-    public void handleButtonAction(ActionEvent event){
-        if(event.getSource() == btnCategorias){
+    public void handleButtonAction(ActionEvent event) throws Exception {
+        if (event.getSource() == btnCategorias) {
             stage.CategoriaView();
         }else if(event.getSource() == btnClientes){
             stage.ClienteView();
@@ -40,8 +38,7 @@ public class IndexController implements Initializable {
         }else if(event.getSource() == btnLibros){
             stage.LibroView();
         }else if(event.getSource() == btnPrestamos){
-            
+            stage.PrestamoView();
         }
     }
-
 }

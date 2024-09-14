@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.jonathanalvarez.webapp.biblioteca.model.Cliente;
 import com.jonathanalvarez.webapp.biblioteca.service.ClienteService;
@@ -21,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Setter;
 
+@Component
 public class ClienteControllerView implements Initializable {
 
     @FXML
@@ -35,6 +37,8 @@ public class ClienteControllerView implements Initializable {
     @Setter
     private Main stage;
 
+    private Boolean editar = false;
+
     @Autowired
     ClienteService clienteService;
 
@@ -43,32 +47,57 @@ public class ClienteControllerView implements Initializable {
         cargarDatos();
     }
 
-    public void handleButtonAction(ActionEvent event){
-        if(event.getSource() == btnGuardar){
-            if(tfId.getText().isBlank()){
+    @FXML
+    public void handleButtonAction(ActionEvent event) {
+        if (event.getSource() == btnGuardar) {
+            if (!editar) {
                 agregarCliente();
-            }else{
+            } else {
                 editarCliente();
             }
-        }else if(event.getSource() == btnRegresar){
+        } else if (event.getSource() == btnLimpiar) {
+            vaciarForm();
+        } else if (event.getSource() == btnRegresar) {
             stage.indexView();
-        }
+        } else if (event.getSource() == btnEliminar) {
+            eliminarCliente();
+        } 
     }
 
-    public void cargarDatos(){
+    public void cargarDatos() {
         tblClientes.setItems(listarClientes());
-        colId.setCellFactory(new PropertyValueFactory<Cliente,Long>("dpi"));
-        colNombre.setCellFactory(new PropertyValueFactory<Cliente,String>("nombre"));
-        colApellido.setCellFactory(new PropertyValueFactory<Cliente,String>("apellido"));
-        colTelefono.setCellFactory(new PropertyValueFactory<Cliente,String>("telefono"));
+        colId.setCellValueFactory(new PropertyValueFactory<Cliente, Long>("dpi"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nombre"));
+        colApellido.setCellValueFactory(new PropertyValueFactory<Cliente, String>("apellido"));
+        colTelefono.setCellValueFactory(new PropertyValueFactory<Cliente, String>("telefono"));
     }
 
-    public ObservableList<Cliente> listarClientes(){
+    public ObservableList<Cliente> listarClientes() {
         return FXCollections.observableList(clienteService.listarClientes());
     }
 
-    public void agregarCliente(){
-        Cliente cliente = null;
+    public void cargarForm() {
+        Cliente cliente = (Cliente) tblClientes.getSelectionModel().getSelectedItem();
+        if (cliente != null) {
+            tfId.setText(cliente.getDpi().toString());
+            tfNombre.setText(cliente.getNombre());
+            tfApellido.setText(cliente.getApellido());
+            tfTelefono.setText(cliente.getTelefono());
+            editar = true;
+        }
+    }
+
+    public void vaciarForm() {
+        tfId.clear();
+        tfNombre.clear();
+        tfApellido.clear();
+        tfTelefono.clear();
+        editar = false;
+    }
+
+    public void agregarCliente() {
+        Cliente cliente = new Cliente();
+        cliente.setDpi(Long.parseLong(tfId.getText()));
         cliente.setNombre(tfNombre.getText());
         cliente.setApellido(tfApellido.getText());
         cliente.setTelefono(tfTelefono.getText());
@@ -76,7 +105,7 @@ public class ClienteControllerView implements Initializable {
         cargarDatos();
     }
 
-    public void editarCliente(){
+    public void editarCliente() {
         Cliente cliente = clienteService.buscarClientePorId(Long.parseLong(tfId.getText()));
         cliente.setNombre(tfNombre.getText());
         cliente.setApellido(tfApellido.getText());
@@ -85,7 +114,7 @@ public class ClienteControllerView implements Initializable {
         cargarDatos();
     }
 
-    public void eliminarCliente(){
+    public void eliminarCliente() {
         Cliente cliente = clienteService.buscarClientePorId(Long.parseLong(tfId.getText()));
         clienteService.eliminarCliente(cliente);
         cargarDatos();

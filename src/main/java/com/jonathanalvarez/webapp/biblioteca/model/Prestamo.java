@@ -1,9 +1,11 @@
 package com.jonathanalvarez.webapp.biblioteca.model;
 
 import java.sql.Date;
-import java.util.List;  
+import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,10 +30,14 @@ public class Prestamo {
     private Empleado empleado;
     @ManyToOne
     private Cliente cliente;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "prestamos_libros",
-    joinColumns =  @JoinColumn(name = "prestamo_id", referencedColumnName = "id"),
+    joinColumns = @JoinColumn(name = "prestamo_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "libros_id", referencedColumnName = "id"))
     private List<Libro> libros;
 
+    public String formatoLibros() {
+        return libros.stream().map(Libro::getNombre).collect(Collectors.joining(", "));
+    }
+    
 }
